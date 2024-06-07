@@ -1,3 +1,5 @@
+import { InfiniteSlider } from "../InfiniteSlider/InfiniteSlider";
+
 export const HeroSection = () => {
   return (
     <>
@@ -11,6 +13,9 @@ export const HeroSection = () => {
             lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
             fugiat aliqua.
           </p>
+          <div className="mt-10 max-w-2xl overflow-x-hidden">
+            <InfiniteSlider />
+          </div>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a
               href="#"

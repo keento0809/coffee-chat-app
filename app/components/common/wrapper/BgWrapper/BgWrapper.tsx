@@ -16,7 +16,7 @@ export const BgWrapper = ({ children }: PropsWithChildren) => {
             }}
           />
         </div>
-        <div className="mx-auto lg:max-w-2xl xl:max-w-4xl py-32 lg:pb-56">
+        <div className="mx-auto lg:max-w-2xl xl:max-w-4xl py-24 lg:pb-56">
           {children}
         </div>
         <div

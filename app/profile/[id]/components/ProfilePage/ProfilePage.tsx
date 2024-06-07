@@ -1,5 +1,6 @@
 "use client";
 
+import { BackButton } from "@/app/components/common/button/BackButton";
 import { PageTitle } from "@/app/components/common/title/PageTitle";
 import { Button } from "@/app/components/shadcn/button/button";
 import Link from "next/link";
@@ -12,6 +13,7 @@ type ProfilePageProps = {
 export const ProfilePage: FC<ProfilePageProps> = ({ userId }) => {
   return (
     <div className="text-center">
+      <BackButton />
       <PageTitle title="Profile" />
       <p className="pt-16">{userId}</p>
       <div className="py-16">

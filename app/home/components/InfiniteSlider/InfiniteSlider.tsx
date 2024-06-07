@@ -3,7 +3,7 @@ import { FC } from "react";
 import testImgURL from "@/public/images/test-img.jpg";
 import { UserCard } from "@/app/components/common/card/UserCard/UserCard";
 
-const DUMMY_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
+export const DUMMY_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
 
 type SliderCompProps = {
   array: number[];
@@ -16,7 +16,7 @@ const SliderComp: FC<SliderCompProps> = ({ array }) => {
       aria-hidden="true"
     >
       {array.map((num) => {
-        return <UserCard key={num} />;
+        return <UserCard key={num} className="cursor-not-allowed" />;
       })}
     </ul>
   );

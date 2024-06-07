@@ -10,7 +10,7 @@ export const BackButton = () => {
   return (
     <Button
       onClick={() => router.back()}
-      className="mb-12 block text-left bg-transparent text-slate-600 border-none hover:bg-transparent"
+      className="mb-4 block text-left bg-transparent text-slate-600 border-none hover:bg-transparent"
     >
       <span className="inline-block mr-2">&lt;</span>Back
     </Button>

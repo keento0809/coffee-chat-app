@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Navbar } from "./components/common/Navbar/Navbar";
-import { BgWrapper } from "./components/common/BgWrapper/BgWrapper";
+import { Navbar } from "./components/common/nav/Navbar/Navbar";
+import { BgWrapper } from "./components/common/wrapper/BgWrapper/BgWrapper";
 
 export const metadata: Metadata = {
   title: "Coffee Chat App",

@@ -1,9 +1,8 @@
 "use client";
 
 import { InfiniteSlider } from "@/app/home/components/InfiniteSlider/InfiniteSlider";
-import Link from "next/link";
 import { FC } from "react";
-import { Button } from "./components/shadcn/button/button";
+import { LinkButton } from "./components/common/button/LinkButton/LinkButton";
 
 export const HeroPage: FC = () => {
   return (
@@ -21,14 +20,7 @@ export const HeroPage: FC = () => {
           <InfiniteSlider />
         </div>
         <div className="mt-14 flex items-center justify-center gap-x-6">
-          <Button asChild>
-            <Link
-              href="/home"
-              className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Get Started
-            </Link>
-          </Button>
+          <LinkButton text="Get Started" linkURL="/home" />
         </div>
       </div>
     </div>

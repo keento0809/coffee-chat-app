@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/app/components/shadcn/form/form";
 import { Input } from "@/app/components/shadcn/input/input";
-import { BaseButton } from "../../button/BaseButton/BaseButton";
+import { BaseButton } from "../../../../../components/common/button/BaseButton/BaseButton";
 
 const formSchema = z.object({
   username: z.string({ message: "username is needed" }),

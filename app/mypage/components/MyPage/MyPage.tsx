@@ -6,6 +6,7 @@ import { PageTitle } from "@/app/components/common/title/PageTitle";
 import { User } from "@supabase/supabase-js";
 import { FC } from "react";
 import { signOut } from "@/app/(auth)/signout/lib/actions";
+import { EditProfileDialog } from "../EditProfileDialog/EditProfileDialog";
 
 type MyPageProps = {
   user: User;
@@ -17,8 +18,8 @@ export const MyPage: FC<MyPageProps> = ({ user }) => {
       <BackButton />
       <PageTitle title="My Page" />
       <div className="py-10 flex flex-col gap-8 items-center">
-        <p>MyPage: {user.email}</p>
-        <BaseButton>Edit Profile</BaseButton>
+        <p>Email: {user.email}</p>
+        <EditProfileDialog />
       </div>
       <div className="py-10">
         <BaseButton

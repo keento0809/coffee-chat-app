@@ -1,4 +1,4 @@
-import { MyPage } from "./components/MyPage";
+import { MyPage } from "./components/MyPage/MyPage";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { signOut } from "@/app/(auth)/signout/lib/actions";
 import { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { FC, useState } from "react";
@@ -8,7 +9,6 @@ const navigation = [
   { name: "Product", href: "#" },
   { name: "Features", href: "#" },
   { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
 ];
 
 type NavbarProps = {
@@ -47,6 +47,14 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
               {item.name}
             </Link>
           ))}
+          {user && (
+            <span
+              className="block text-sm font-semibold leading-6 text-gray-900"
+              onClick={() => signOut()}
+            >
+              SignOut
+            </span>
+          )}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           {user ? (

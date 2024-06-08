@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { type ZodError, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { redirect } from "next/navigation";
+import { useFormState, useFormStatus } from "react-dom";
 // import { useToast } from "@/src/components/common/toast/use-toast";
-const EMAIL_PATTERN = /^[\u0021-\u007e]+$/u;
+export const EMAIL_PATTERN = /^[\u0021-\u007e]+$/u;
 
 const FormSchema = z.object({
   email: z
@@ -31,6 +32,8 @@ export const useLoginForm = () => {
   }> | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   //   const { toast } = useToast();
+  const { pending } = useFormStatus();
+  // const[state,formAction] = useFormState()
 
   const emailError = errors?.issues.find((e) => e.path[0] === "email");
   const passwordError = errors?.issues.find((e) => e.path[0] === "password");

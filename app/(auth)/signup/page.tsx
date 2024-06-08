@@ -1,5 +1,4 @@
-import React from "react";
-import { SignupPage } from "./components/SignupPage";
+import { SignupPage } from "./components/SingupPage/SignupPage";
 
 export default function Page() {
   return <SignupPage />;

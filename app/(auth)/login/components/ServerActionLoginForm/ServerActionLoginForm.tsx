@@ -1,6 +1,5 @@
 "use client";
 
-import { authenticate } from "@/lib/actions";
 import { useServerActionLoginForm } from "../../hooks/ServerActionLoginForm/useServerActionLoginForm";
 import { Button } from "@/app/components/shadcn/button/button";
 import React from "react";
@@ -12,14 +11,15 @@ import {
   FormItem,
   FormLabel,
 } from "@/app/components/shadcn/form/form";
+import { login } from "@/app/(auth)/login/lib/actions";
 
 export const ServerActionLoginForm = () => {
-  const { form, dispatch, errorMessage, pending, handleClick, router } =
+  const { form, errorMessage, pending, handleClick, router } =
     useServerActionLoginForm();
   return (
     <Form {...form}>
       <form
-        action={dispatch}
+        action={login}
         className="w-full space-y-6 max-w-[450px] md:px-0 px-4"
       >
         <FormField
@@ -58,7 +58,7 @@ export const ServerActionLoginForm = () => {
             </FormItem>
           )}
         />
-        {errorMessage && <p>{errorMessage}</p>}
+        {errorMessage && <p className="text-red-500 text-md">{errorMessage}</p>}
         <Button
           aria-disabled={pending}
           type="submit"

@@ -1,5 +1,10 @@
+import { User } from "@supabase/supabase-js";
 import { FC } from "react";
 
-export const MyPage: FC = () => {
-  return <div>MyPage</div>;
+type MyPageProps = {
+  user: User;
+};
+
+export const MyPage: FC<MyPageProps> = ({ user }) => {
+  return <div>MyPage: {user.email}</div>;
 };

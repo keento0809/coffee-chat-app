@@ -1,11 +1,9 @@
 "use server";
 
-import { Database } from "@/types/supabase";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
-type Profile = Database["public"]["Tables"]["profiles"]["Row"];
+import type { UserProfile } from "@/types";
 
 export async function signup(formData: FormData) {
   const supabase = createClient();
@@ -18,14 +16,13 @@ export async function signup(formData: FormData) {
   const { error, data } = await supabase.auth.signUp(signUpUserData);
 
   if (error) {
-    console.log("user auth時のエラー: ", error);
-
+    console.error(error);
     redirect("/error");
   }
 
   if (data.user) {
     const { id, email } = data.user;
-    const profileData: Profile = {
+    const profileData: UserProfile = {
       id,
       email: email ?? "",
       username: null,
@@ -36,8 +33,7 @@ export async function signup(formData: FormData) {
     const { error } = await supabase.from("profiles").insert(profileData);
 
     if (error) {
-      console.log("auth完了後のエラーですね、", error);
-
+      console.error(error);
       redirect("/error");
     }
   }

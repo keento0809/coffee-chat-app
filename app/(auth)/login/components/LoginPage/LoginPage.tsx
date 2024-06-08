@@ -2,11 +2,17 @@
 
 import { FC } from "react";
 import { LoginForm } from "@/app/(auth)/login/components/LoginForm/LoginForm";
+import { PageTitle } from "@/app/components/common/title/PageTitle";
+import { BackButton } from "@/app/components/common/button/BackButton/BackButton";
 
 export const LoginPage: FC = () => {
   return (
-    <div className="min-h-[calc(100svh_-_80px)] flex flex-col justify-center items-center gap-8 pb-10 lg:pb-20">
-      <LoginForm />
+    <div className="text-center">
+      <BackButton />
+      <PageTitle title="Login Here!" />
+      <div className="py-16 flex justify-center items-center">
+        <LoginForm />
+      </div>
     </div>
   );
 };

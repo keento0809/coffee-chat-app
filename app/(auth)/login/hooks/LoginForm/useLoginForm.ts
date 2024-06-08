@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { type ZodError, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { EMAIL_PATTERN } from "@/src/constants/regex/regex";
 import { redirect } from "next/navigation";
 // import { useToast } from "@/src/components/common/toast/use-toast";
 const EMAIL_PATTERN = /^[\u0021-\u007e]+$/u;

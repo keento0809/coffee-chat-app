@@ -4,6 +4,7 @@ import { PageTitle } from "@/app/components/common/title/PageTitle";
 import { DUMMY_ARRAY } from "../InfiniteSlider/InfiniteSlider";
 import { UserCard } from "@/app/components/common/card/UserCard/UserCard";
 import { LinkButton } from "@/app/components/common/button/LinkButton/LinkButton";
+import Link from "next/link";
 
 export const HomePage = () => {
   return (
@@ -15,11 +16,16 @@ export const HomePage = () => {
       <ul className="py-10 flex items-center gap-1 overflow-scroll">
         {DUMMY_ARRAY.map((num) => {
           return (
-            <li key={num} className="">
-              <UserCard
-                linkURL={`/profile/${num}`}
-                className="hover:border-slate-600 transition-all hover:scale-105 cursor-pointer"
-              />
+            <li
+              key={num}
+              className="p-5 block mx-1 border rounded text-center text-gray-500 max-w-sm lg:min-w-[300px]"
+            >
+              <Link href={`/profile/${num}`}>
+                <UserCard
+                  linkURL={`/profile/${num}`}
+                  className="hover:border-slate-600 transition-all hover:scale-105 cursor-pointer"
+                />
+              </Link>
             </li>
           );
         })}

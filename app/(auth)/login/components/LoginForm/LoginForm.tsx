@@ -33,7 +33,12 @@ export const LoginForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={cn(emailError && "text-red-500")}>
+                <FormLabel
+                  className={cn(
+                    "block pl-1.5 text-left",
+                    emailError && "text-red-500"
+                  )}
+                >
                   Email
                 </FormLabel>
                 <FormControl>
@@ -52,7 +57,12 @@ export const LoginForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={cn(passwordError && "text-red-500")}>
+                <FormLabel
+                  className={cn(
+                    "block pl-1.5 text-left",
+                    passwordError && "text-red-500"
+                  )}
+                >
                   Password
                 </FormLabel>
                 <FormControl>
@@ -69,7 +79,10 @@ export const LoginForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full">
+          <Button
+            type="submit"
+            className="block mt-10 w-[60%] mx-auto rounded-md bg-indigo-600 px-8 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
             Submit
           </Button>
         </form>

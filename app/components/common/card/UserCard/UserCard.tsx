@@ -13,13 +13,7 @@ type UserCardProps = {
 
 export const UserCard: FC<UserCardProps> = ({ className, linkURL = "#" }) => {
   return (
-    <Link
-      href={linkURL}
-      className={cn(
-        "p-5 block mx-1 border rounded text-center text-gray-500 max-w-sm lg:min-w-[300px]",
-        className
-      )}
-    >
+    <div>
       <Image
         className="w-32 h-32 rounded-full mx-auto"
         width={138}
@@ -28,12 +22,9 @@ export const UserCard: FC<UserCardProps> = ({ className, linkURL = "#" }) => {
         alt="avatarImg"
       />
       <div className="text-sm mt-5">
-        <a
-          href="#"
-          className="font-medium leading-none text-gray-900 hover:text-indigo-600 transition duration-500 ease-in-out"
-        >
+        <span className="font-medium leading-none text-gray-900 hover:text-indigo-600 transition duration-500 ease-in-out">
           Jane Doe
-        </a>
+        </span>
         <p>Blogger &amp; Youtuber</p>
       </div>
 
@@ -41,6 +32,6 @@ export const UserCard: FC<UserCardProps> = ({ className, linkURL = "#" }) => {
         Lorem ipsum dolor sit amet, consecte adipisicing elit. Voluptatibus quia
         Maiores et perferendis eaque.
       </p>
-    </Link>
+    </div>
   );
 };

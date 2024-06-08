@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { ZodError, z } from "zod";
 import { EMAIL_PATTERN } from "@/app/(auth)/login/hooks/LoginForm/useLoginForm";
@@ -6,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
 // import { useToast } from "@/app/components/common/toast/use-toast";
 
-const userSchema = z.object({
+export const userSchema = z.object({
   username: z
     .string({ required_error: "Username is required." })
     .min(2, { message: "Username must be more than 2 words" }),

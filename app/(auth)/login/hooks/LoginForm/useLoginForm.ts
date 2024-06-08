@@ -7,7 +7,7 @@ import { useFormState, useFormStatus } from "react-dom";
 // import { useToast } from "@/src/components/common/toast/use-toast";
 export const EMAIL_PATTERN = /^[\u0021-\u007e]+$/u;
 
-const FormSchema = z.object({
+export const formSchema = z.object({
   email: z
     .string({ required_error: "Email is required." })
     .email({ message: "Please enter correct email address" })
@@ -18,8 +18,8 @@ const FormSchema = z.object({
 });
 
 export const useLoginForm = () => {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -45,7 +45,7 @@ export const useLoginForm = () => {
       email: loginUserData.get("email"),
       password: loginUserData.get("password"),
     };
-    const parsedCredentials = FormSchema.safeParse(credentials);
+    const parsedCredentials = formSchema.safeParse(credentials);
 
     if (!parsedCredentials.success) {
       setErrors(parsedCredentials.error);

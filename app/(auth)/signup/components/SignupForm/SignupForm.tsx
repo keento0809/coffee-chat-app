@@ -13,6 +13,7 @@ import { Input } from "@/app/components/shadcn/input/input";
 import { useSignupForm } from "@/app/(auth)/signup/hooks/SignupForm/useSignupForm";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { signup } from "@/app/(auth)/signup/lib/actions";
 
 export const SignupForm = () => {
   const {
@@ -28,7 +29,8 @@ export const SignupForm = () => {
   return (
     <Form {...form}>
       <form
-        onSubmit={onSubmit}
+        // onSubmit={onSubmit}
+        action={signup}
         className="w-full max-w-[450px] space-y-6 px-4 md:px-0"
       >
         <FormField

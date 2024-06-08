@@ -1,7 +1,8 @@
 "use client";
 
+import { User } from "@supabase/supabase-js";
 import Link from "next/link";
-import { useState } from "react";
+import { FC, useState } from "react";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -10,7 +11,11 @@ const navigation = [
   { name: "Company", href: "#" },
 ];
 
-export const Navbar = () => {
+type NavbarProps = {
+  user: User | null;
+};
+
+export const Navbar: FC<NavbarProps> = ({ user }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <header className="absolute inset-x-0 top-0 z-50">
@@ -44,12 +49,21 @@ export const Navbar = () => {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link
-            href="/login"
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Log in <span aria-hidden="true">&rarr;</span>
-          </Link>
+          {user ? (
+            <Link
+              href="/mypage"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              MyPage
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              Log in <span aria-hidden="true">&rarr;</span>
+            </Link>
+          )}
         </div>
       </nav>
     </header>

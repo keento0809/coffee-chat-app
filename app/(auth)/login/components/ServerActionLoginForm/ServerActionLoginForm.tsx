@@ -1,8 +1,6 @@
 "use client";
 
-import { authenticate } from "@/lib/actions";
 import { useServerActionLoginForm } from "../../hooks/ServerActionLoginForm/useServerActionLoginForm";
-import { Button } from "@/app/components/shadcn/button/button";
 import React from "react";
 import { Input } from "@/app/components/shadcn/input/input";
 import {
@@ -12,14 +10,16 @@ import {
   FormItem,
   FormLabel,
 } from "@/app/components/shadcn/form/form";
+import { login } from "@/app/(auth)/login/lib/actions";
+import { BaseButton } from "@/app/components/common/button/BaseButton/BaseButton";
 
 export const ServerActionLoginForm = () => {
-  const { form, dispatch, errorMessage, pending, handleClick, router } =
+  const { form, errorMessage, pending, handleClick, router } =
     useServerActionLoginForm();
   return (
     <Form {...form}>
       <form
-        action={dispatch}
+        action={login}
         className="w-full space-y-6 max-w-[450px] md:px-0 px-4"
       >
         <FormField
@@ -58,15 +58,15 @@ export const ServerActionLoginForm = () => {
             </FormItem>
           )}
         />
-        {errorMessage && <p>{errorMessage}</p>}
-        <Button
+        {errorMessage && <p className="text-red-500 text-md">{errorMessage}</p>}
+        <BaseButton
           aria-disabled={pending}
           type="submit"
           className="w-1/2 mt-0"
           onClick={handleClick}
         >
           Login
-        </Button>
+        </BaseButton>
         <div className="pb-6 text-xs w-full flex justify-center items-center">
           New to Coffee Chat App?{" "}
           <span

@@ -22,7 +22,7 @@ export const HeroPage: FC = () => {
           <InfiniteSlider />
         </div>
         <div className="mt-14 flex items-center justify-center gap-x-6">
-          <LinkButton text="Get Started" linkURL="/home" />
+          <LinkButton text="Get Started" linkURL="/login" />
         </div>
       </div>
     </div>

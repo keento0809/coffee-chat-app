@@ -3,8 +3,6 @@
 import { BackButton } from "@/app/components/common/button/BackButton/BackButton";
 import { LinkButton } from "@/app/components/common/button/LinkButton/LinkButton";
 import { PageTitle } from "@/app/components/common/title/PageTitle";
-import { Button } from "@/app/components/shadcn/button/button";
-import Link from "next/link";
 import { FC } from "react";
 
 type ProfilePageProps = {

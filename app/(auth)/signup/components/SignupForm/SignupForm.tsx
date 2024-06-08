@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/app/components/shadcn/button/button";
 import {
   Form,
   FormControl,
@@ -14,6 +13,7 @@ import { useSignupForm } from "@/app/(auth)/signup/hooks/SignupForm/useSignupFor
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { signup } from "@/app/(auth)/signup/lib/actions";
+import { BaseButton } from "@/app/components/common/button/BaseButton/BaseButton";
 
 export const SignupForm = () => {
   const {
@@ -137,9 +137,9 @@ export const SignupForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <BaseButton type="submit" className="w-full">
           Submit
-        </Button>
+        </BaseButton>
       </form>
       <div className="py-6 text-xs w-full flex justify-center items-center">
         Already TechMarche member?{" "}

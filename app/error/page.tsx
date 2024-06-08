@@ -1,3 +1,5 @@
-export default function ErrorPage() {
-  return <div>Something went wrong</div>;
+import { ErrorPage } from "./components/ErrorPage";
+
+export default function Page() {
+  return <ErrorPage />;
 }

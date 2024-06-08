@@ -9,7 +9,7 @@ import { EditProfileDialog } from "../EditProfileDialog/EditProfileDialog";
 import { UserProfile } from "@/types";
 
 type MyPageProps = {
-  userProfile?: UserProfile;
+  userProfile: UserProfile;
 };
 
 export const MyPage: FC<MyPageProps> = ({ userProfile }) => {
@@ -19,7 +19,7 @@ export const MyPage: FC<MyPageProps> = ({ userProfile }) => {
       <PageTitle title="My Page" />
       <div className="py-10 flex flex-col gap-8 items-center">
         <p>Email: {userProfile?.email ?? ""}</p>
-        <EditProfileDialog />
+        <EditProfileDialog userProfile={userProfile} />
       </div>
       <div className="py-10">
         <BaseButton

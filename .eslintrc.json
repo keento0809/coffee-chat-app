@@ -1,6 +1,18 @@
 {
   "extends": ["next", "next/core-web-vitals"],
+  "plugins": ["unused-imports"],
   "rules": {
-    "react/jsx-no-target-blank": ["error", { "allowReferrer": true }]
+    "react/jsx-no-target-blank": ["error", { "allowReferrer": true }],
+    "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ]
   }
 }

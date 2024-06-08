@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { supabase } from "@/utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 
 export async function login(formData: FormData) {
   const data = {
@@ -10,6 +10,7 @@ export async function login(formData: FormData) {
     password: formData.get("password") as string,
   };
 
+  const supabase = createClient();
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {

@@ -10,26 +10,28 @@ export const HomePage = () => {
   return (
     <div>
       <PageTitle title="Start Coffee Chat Now!" />
-      <p className="mt-4 text-center text-md leading-8 text-gray-600">
+      <p className="mt-4 text-center text-md leading-6 text-gray-600">
         Select a person whom you want to have a coffee chat
       </p>
-      <ul className="py-10 flex items-center gap-1 overflow-scroll">
-        {DUMMY_ARRAY.map((num) => {
-          return (
-            <li
-              key={num}
-              className="p-5 block mx-1 border rounded text-center text-gray-500 max-w-sm lg:min-w-[300px]"
-            >
-              <Link href={`/profile/${num}`}>
-                <UserCard
-                  linkURL={`/profile/${num}`}
-                  className="hover:border-slate-600 transition-all hover:scale-105 cursor-pointer"
-                />
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <p className="text-center text-md leading-6 text-gray-600">
+        Scroll user cards to see all users
+      </p>
+      <div className="overflow-x-scroll no-scrollbar">
+        <ul className="my-10 flex items-center gap-1">
+          {DUMMY_ARRAY.map((num) => {
+            return (
+              <li
+                key={num}
+                className="p-5 block mx-1 border rounded text-center text-gray-500 max-w-sm lg:min-w-[300px] hover:border-slate-600 transition-all hover:scale-105 cursor-pointer"
+              >
+                <Link href={`/profile/${num}`}>
+                  <UserCard linkURL={`/profile/${num}`} />
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
       <div className="py-10 text-center">
         <LinkButton text="Learn More" linkURL="/about" />
       </div>

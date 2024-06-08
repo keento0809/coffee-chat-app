@@ -6,3 +6,10 @@ export function createClient() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
 }
+
+export async function getUser() {
+  const supabase = createClient();
+  const user = await supabase.auth.getUser();
+
+  return user;
+}

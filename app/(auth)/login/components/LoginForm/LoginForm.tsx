@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/app/components/shadcn/button/button";
 import {
   Form,
   FormControl,
@@ -14,6 +13,7 @@ import { useLoginForm } from "@/app/(auth)/login/hooks/LoginForm/useLoginForm";
 // import { Loader } from "@/src/components/loader/Loader";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { BaseButton } from "@/app/components/common/button/BaseButton/BaseButton";
 
 export const LoginForm = () => {
   const { form, onSubmit, isLoading, emailError, passwordError } =
@@ -79,12 +79,7 @@ export const LoginForm = () => {
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            className="block mt-10 w-[60%] mx-auto rounded-md bg-indigo-600 px-8 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Submit
-          </Button>
+          <BaseButton type="submit">Submit</BaseButton>
         </form>
       </Form>
     </>

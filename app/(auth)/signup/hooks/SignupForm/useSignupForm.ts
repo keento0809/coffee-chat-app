@@ -8,23 +8,33 @@ import { useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
 // import { useToast } from "@/app/components/common/toast/use-toast";
 
-export const userSchema = z.object({
-  username: z
-    .string({ required_error: "Username is required." })
-    .min(2, { message: "Username must be more than 2 words" }),
-  email: z
-    .string({ required_error: "Email is required." })
-    .email({ message: "Please enter correct email address" })
-    .regex(EMAIL_PATTERN, { message: "Please enter correct pattern" }),
-  password: z
-    .string({ required_error: "Password is required." })
-    .min(6, { message: "Password must be more than 6 characters" }),
-  passwordConfirmation: z
-    .string({ required_error: "Password Confirmation is required." })
-    .min(6, {
-      message: "Password Confirmation must be more than 6 characters",
-    }),
-});
+export const userSchema = z
+  .object({
+    username: z
+      .string({ required_error: "Username is required." })
+      .min(2, { message: "Username must be more than 2 words" }),
+    email: z
+      .string({ required_error: "Email is required." })
+      .email({ message: "Please enter correct email address" })
+      .regex(EMAIL_PATTERN, { message: "Please enter correct pattern" }),
+    password: z
+      .string({ required_error: "Password is required." })
+      .min(6, { message: "Password must be more than 6 characters" }),
+    passwordConfirmation: z
+      .string({ required_error: "Password Confirmation is required." })
+      .min(6, {
+        message: "Password Confirmation must be more than 6 characters",
+      }),
+  })
+  .superRefine(({ password, passwordConfirmation }, ctx) => {
+    if (password !== passwordConfirmation) {
+      ctx.addIssue({
+        code: "custom",
+        message: "The passwords did not match",
+        path: ["passwordConfirmation"],
+      });
+    }
+  });
 
 type ErrorType = {
   username: string;

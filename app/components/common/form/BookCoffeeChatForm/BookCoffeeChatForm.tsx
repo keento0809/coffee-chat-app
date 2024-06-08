@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/app/components/shadcn/button/button";
 import {
   Form,
   FormControl,
@@ -14,6 +13,7 @@ import {
   FormMessage,
 } from "@/app/components/shadcn/form/form";
 import { Input } from "@/app/components/shadcn/input/input";
+import { BaseButton } from "../../button/BaseButton/BaseButton";
 
 const formSchema = z.object({
   username: z.string({ message: "username is needed" }),
@@ -52,12 +52,7 @@ export const BookCoffeeChatForm = () => {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          className="rounded-md bg-indigo-600 px-8 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Submit
-        </Button>
+        <BaseButton type="submit">Submit</BaseButton>
       </form>
     </Form>
   );

@@ -48,7 +48,7 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
             <Input
               id="username"
               defaultValue={userProfile.email ? userProfile.email : ""}
-              className="col-span-3 cursor-not-allowed opacity-20"
+              className="col-span-3 pointer-events-none cursor-not-allowed opacity-20"
               readOnly
             />
           </div>
@@ -93,8 +93,10 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
             />
           </div>
         </div>
-        <DialogFooter className="sm:justify-center">
-          <BaseButton type="submit">Save changes</BaseButton>
+        <DialogFooter className="sm:justify-center pt-4">
+          <BaseButton type="submit" onClick={() => {}}>
+            Save changes
+          </BaseButton>
         </DialogFooter>
       </DialogContent>
     </Dialog>

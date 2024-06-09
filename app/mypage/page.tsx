@@ -12,13 +12,12 @@ export default async function Page() {
     .from("profiles")
     .select("*")
     .eq("id", data.user.id)
-    .returns<UserProfile[]>()
-    .single();
+    .returns<UserProfile[]>();
 
   if (fetchError) {
     console.error(fetchError);
     redirect("/error");
   }
 
-  return <MyPage userProfile={userProfile} />;
+  return <MyPage userProfile={userProfile[0]} />;
 }

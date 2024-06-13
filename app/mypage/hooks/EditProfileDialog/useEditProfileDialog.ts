@@ -1,9 +1,8 @@
 "use client";
 
-import { Dispatch, SetStateAction, useCallback, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { ensureIsArray } from "@/lib/utils";
 import { updateProfile } from "../../lib/actions";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { UserProfile } from "@/types";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -25,10 +24,6 @@ const formSchema = z.object({
 export const useEditProfileDialog = ({
   userProfile,
 }: UseEditProfileDialogProps) => {
-  const pathname = usePathname();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
   const [hobbies, setHobbies] = useState<string[]>(
     ensureIsArray(userProfile.hobby)
   );
@@ -62,19 +57,6 @@ export const useEditProfileDialog = ({
     dispatch(updatedArray);
   };
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
-
-  const handleAddQuery = () => {
-    router.push(pathname + "?" + createQueryString("user", userProfile.id));
-  };
   return {
     form,
     hobbies,
@@ -82,8 +64,6 @@ export const useEditProfileDialog = ({
     socialmedialinks,
     setSocialmedialinks,
     updateProfileWithUserId,
-    searchParams,
     handleRemoveItemFromArray,
-    handleAddQuery,
   };
 };

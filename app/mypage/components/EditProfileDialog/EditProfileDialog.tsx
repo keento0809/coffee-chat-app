@@ -33,14 +33,13 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
     socialmedialinks,
     setSocialmedialinks,
     updateProfileWithUserId,
-    handleAddQuery,
     handleRemoveItemFromArray,
   } = useEditProfileDialog({ userProfile });
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <BaseButton onClick={handleAddQuery}>Edit Profile</BaseButton>
+        <BaseButton>Edit Profile</BaseButton>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <Form {...form}>
@@ -199,7 +198,7 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
                                     handleRemoveItemFromArray({
                                       index: idx,
                                       array: hobbies,
-                                      dispatch: setHobbies,
+                                      dispatch: setSocialmedialinks,
                                     })
                                   }
                                 >

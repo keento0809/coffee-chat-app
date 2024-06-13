@@ -38,8 +38,6 @@ export async function signup(formData: FormData) {
     }
   }
 
-  // TODO: I'd like to insert a new user profile data to profiles table of supabase here
-
   revalidatePath("/", "layout");
   redirect("/home");
 }

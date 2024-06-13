@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -13,11 +14,11 @@ const formSchema = z.object({
   socialmedialinks: z.string().array().nullable(),
 });
 
-export async function updateProfile(formData: FormData, userId: string) {
+export async function updateProfile(id: string, formData: FormData) {
   const supabase = createClient();
 
   const data = {
-    id: userId,
+    id,
     username: formData.get("username"),
     email: formData.get("email"),
     occupation: formData.get("occupation"),
@@ -44,5 +45,6 @@ export async function updateProfile(formData: FormData, userId: string) {
 
   console.log(updatedData);
 
+  revalidatePath("/", "layout");
   redirect("/home");
 }

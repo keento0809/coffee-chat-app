@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-function isNotNull<T>(value: T) {
+export function isNotNull<T>(value: T) {
   return value !== null;
 }
 

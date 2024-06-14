@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import { type ZodError, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { redirect } from "next/navigation";
-import { useFormStatus } from "react-dom";
-// import { useToast } from "@/src/components/common/toast/use-toast";
 export const EMAIL_PATTERN = /^[\u0021-\u007e]+$/u;
 
 export const formSchema = z.object({
@@ -31,9 +29,6 @@ export const useLoginForm = () => {
     password: string;
   }> | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  //   const { toast } = useToast();
-  const { pending } = useFormStatus();
-  // const[state,formAction] = useFormState()
 
   const emailError = errors?.issues.find((e) => e.path[0] === "email");
   const passwordError = errors?.issues.find((e) => e.path[0] === "password");
@@ -63,15 +58,8 @@ export const useLoginForm = () => {
         },
       });
       if (loginUser) redirect("/home");
-      //   toast({
-      //     description: "Login Completed!",
-      //   });
     } catch (err) {
       if (err instanceof Error) console.log(err.message);
-      //   toast({
-      //     variant: "destructive",
-      //     description: "Failed to signup. Please try it again",
-      //   });
     } finally {
       setIsLoading(false);
     }

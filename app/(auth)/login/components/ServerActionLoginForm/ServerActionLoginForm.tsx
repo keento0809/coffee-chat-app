@@ -14,8 +14,8 @@ import { login } from "@/app/(auth)/login/lib/actions";
 import { BaseButton } from "@/app/components/common/button/BaseButton/BaseButton";
 
 export const ServerActionLoginForm = () => {
-  const { form, errorMessage, pending, handleClick, router } =
-    useServerActionLoginForm();
+  const { form, pending, handleClick, router } = useServerActionLoginForm();
+
   return (
     <Form {...form}>
       <form
@@ -58,7 +58,6 @@ export const ServerActionLoginForm = () => {
             </FormItem>
           )}
         />
-        {errorMessage && <p className="text-red-500 text-md">{errorMessage}</p>}
         <BaseButton
           aria-disabled={pending}
           type="submit"

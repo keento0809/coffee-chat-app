@@ -8,6 +8,8 @@ import type { UserProfile } from "@/types";
 export async function signup(formData: FormData) {
   const supabase = createClient();
 
+  // TODO: Somehow I cannot implement safeParse in signup server action. Need to find a solution
+
   const signUpUserData = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
@@ -22,10 +24,11 @@ export async function signup(formData: FormData) {
 
   if (data.user) {
     const { id, email } = data.user;
+    const username = formData.get("username");
     const profileData: UserProfile = {
       id,
       email: email ?? "",
-      username: null,
+      username: username !== null ? username.toString() : "",
       occupation: null,
       hobby: null,
       socialmedialinks: [],

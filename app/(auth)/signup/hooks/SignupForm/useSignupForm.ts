@@ -6,7 +6,7 @@ import { EMAIL_PATTERN } from "@/app/(auth)/login/hooks/LoginForm/useLoginForm";
 // import { EMAIL_PATTERN } from "@/src/constants/regex/regex";
 import { useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
-// import { useToast } from "@/app/components/common/toast/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const userSchema = z
   .object({
@@ -36,6 +36,8 @@ export const userSchema = z
     }
   });
 
+type SignupForm = z.infer<typeof userSchema>;
+
 type ErrorType = {
   username: string;
   email: string;
@@ -45,8 +47,9 @@ type ErrorType = {
 
 export const useSignupForm = () => {
   const [errors, setErrors] = useState<ZodError<ErrorType> | null>(null);
-  const form = useForm<z.infer<typeof userSchema>>();
-  //   const { toast } = useToast();
+  const form = useForm<SignupForm>({
+    resolver: zodResolver(userSchema),
+  });
 
   const usernameError = errors?.issues.find((e) => e.path[0] === "username");
   const emailError = errors?.issues.find((e) => e.path[0] === "email");

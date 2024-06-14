@@ -49,7 +49,7 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
           ))}
           {user && (
             <span
-              className="block text-sm font-semibold leading-6 text-gray-900"
+              className="block text-sm cursor-pointer font-semibold leading-6 text-gray-900"
               onClick={() => signOut()}
             >
               SignOut
@@ -60,14 +60,14 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
           {user ? (
             <Link
               href="/mypage"
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm cursor-pointer font-semibold leading-6 text-gray-900"
             >
               MyPage
             </Link>
           ) : (
             <Link
               href="/login"
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm cursor-pointer font-semibold leading-6 text-gray-900"
             >
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>

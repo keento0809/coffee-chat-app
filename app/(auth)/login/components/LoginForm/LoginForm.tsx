@@ -10,7 +10,6 @@ import {
 } from "@/app/components/shadcn/form/form";
 import { Input } from "@/app/components/shadcn/input/input";
 import { useLoginForm } from "@/app/(auth)/login/hooks/LoginForm/useLoginForm";
-// import { Loader } from "@/src/components/loader/Loader";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { BaseButton } from "@/app/components/common/button/BaseButton/BaseButton";
@@ -22,7 +21,6 @@ export const LoginForm = () => {
 
   return (
     <>
-      {/* {isLoading && <Loader />} */}
       <Form {...form}>
         <form
           onSubmit={onSubmit}

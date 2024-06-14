@@ -17,7 +17,7 @@ export const MyPage: FC<MyPageProps> = ({ userProfile }) => {
       <BackButton />
       <PageTitle title="My Page" />
       <div className="py-10 flex flex-col gap-8 items-center">
-        <ProfileList useProfile={userProfile} />
+        <ProfileList userProfile={userProfile} />
         <EditProfileDialog userProfile={userProfile} />
       </div>
     </div>

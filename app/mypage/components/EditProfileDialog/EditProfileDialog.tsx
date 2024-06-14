@@ -21,6 +21,7 @@ import {
   FormItem,
   FormLabel,
 } from "@/app/components/shadcn/form/form";
+import { cn } from "@/lib/utils";
 
 type EditProfileDialogProps = {
   userProfile: UserProfile;
@@ -122,7 +123,7 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
               <FormField
                 control={form.control}
                 name="hobby"
-                render={({ field }) => (
+                render={({ field, formState, fieldState }) => (
                   <div className="grid grid-cols-4 items-baseline gap-4">
                     <FormLabel htmlFor="username" className="text-center">
                       Hobby
@@ -139,10 +140,13 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
                                 <Input
                                   defaultValue={hobby}
                                   {...field}
-                                  className="w-full col-span-3 border border-slate-600"
+                                  className={cn(
+                                    "w-full col-span-3 border border-slate-600"
+                                  )}
                                 />
                                 <BaseButton
-                                  className="w-1/4"
+                                  type="button"
+                                  className="w-1/4 bg-white text-slate-600 border border-indigo-600"
                                   onClick={() =>
                                     handleRemoveItemFromArray({
                                       index: idx,
@@ -158,6 +162,7 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
                           })}
                         </div>
                         <BaseButton
+                          type="button"
                           className="inline-block self-end w-1/4 px-0"
                           onClick={() => setHobbies([...hobbies, ""])}
                         >
@@ -175,9 +180,9 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
                   <div className="grid grid-cols-4 items-baseline gap-4">
                     <FormLabel
                       htmlFor="socialmedialinks"
-                      className="text-center"
+                      className="text-center text-wrap col-span-1 whitespace-pre-wrap"
                     >
-                      SocialMediaLinks
+                      SocialMedia Links
                     </FormLabel>
                     <FormControl>
                       <div className="flex flex-col gap-2 col-span-3">
@@ -194,7 +199,8 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
                                   className="w-full col-span-3 border border-slate-600"
                                 />
                                 <BaseButton
-                                  className="w-1/4"
+                                  type="button"
+                                  className="w-1/4 bg-white text-slate-600 border border-indigo-600"
                                   onClick={() =>
                                     handleRemoveItemFromArray({
                                       index: idx,
@@ -210,8 +216,11 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
                           })}
                         </div>
                         <BaseButton
+                          type="button"
                           className="inline-block self-end w-1/4 px-0"
-                          onClick={() => setHobbies([...hobbies, ""])}
+                          onClick={() =>
+                            setSocialmedialinks([...socialmedialinks, ""])
+                          }
                         >
                           Add
                         </BaseButton>

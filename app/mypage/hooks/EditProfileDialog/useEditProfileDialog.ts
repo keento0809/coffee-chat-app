@@ -15,9 +15,13 @@ type UseEditProfileDialogProps = {
 
 const formSchema = z.object({
   id: z.string().uuid(),
-  username: z.string(),
+  username: z
+    .string()
+    .min(3, { message: "username must be more than 3 characters" }),
   email: z.string().email({ message: "Email is Required" }),
-  occupation: z.string(),
+  occupation: z
+    .string()
+    .min(3, { message: "username must be more than 3 characters" }),
   hobby: z.string().array(),
   socialmedialinks: z.string().array(),
 });
@@ -29,6 +33,12 @@ export const useEditProfileDialog = ({
     ensureIsArray(userProfile.hobby)
   );
   const [socialmedialinks, setSocialmedialinks] = useState<string[]>(
+    ensureIsArray(userProfile.socialmedialinks)
+  );
+  console.log(
+    "どないやねん、",
+    userProfile,
+    "と、",
     ensureIsArray(userProfile.socialmedialinks)
   );
   const { toast } = useToast();

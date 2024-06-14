@@ -7,6 +7,7 @@ import { UserProfile } from "@/types";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useToast } from "@/app/components/shadcn/toast/use-toast";
 
 type UseEditProfileDialogProps = {
   userProfile: UserProfile;
@@ -30,6 +31,7 @@ export const useEditProfileDialog = ({
   const [socialmedialinks, setSocialmedialinks] = useState<string[]>(
     ensureIsArray(userProfile.socialmedialinks)
   );
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -42,7 +44,7 @@ export const useEditProfileDialog = ({
     },
   });
 
-  const updateProfileWithUserId = updateProfile.bind("id", userProfile.id);
+  const updateProfileWithUserId = updateProfile.bind(null, userProfile.id);
 
   const handleRemoveItemFromArray = ({
     index,
@@ -57,13 +59,26 @@ export const useEditProfileDialog = ({
     dispatch(updatedArray);
   };
 
+  const clientAction = async (formData: FormData) => {
+    const result = await updateProfileWithUserId(formData);
+
+    if (result?.error) {
+      alert(result.error);
+    }
+
+    // TODO: Add toast here
+    toast({
+      description: "Successfully updated!",
+    });
+  };
+
   return {
     form,
     hobbies,
     setHobbies,
     socialmedialinks,
     setSocialmedialinks,
-    updateProfileWithUserId,
+    clientAction,
     handleRemoveItemFromArray,
   };
 };

@@ -2,7 +2,6 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -29,22 +28,20 @@ export async function updateProfile(id: string, formData: FormData) {
 
   if (!parsedData.success) {
     console.error(parsedData.error);
-    redirect("/error");
+    return { error: "Something is wrong..." };
   }
 
-  const { data: updatedData, error } = await supabase
-    .from("profiles")
-    .update(parsedData.data)
-    .eq("id", parsedData.data.id)
-    .select();
-
-  if (error) {
-    console.error();
-    redirect("/error");
+  try {
+    const { data: updatedData } = await supabase
+      .from("profiles")
+      .update(parsedData.data)
+      .eq("id", parsedData.data.id)
+      .select();
+    console.log(updatedData);
+  } catch (error) {
+    if (error instanceof Error) return { error: error.message };
+    return { error: "Something is wrong..." };
   }
-
-  console.log(updatedData);
 
   revalidatePath("/", "layout");
-  redirect("/home");
 }

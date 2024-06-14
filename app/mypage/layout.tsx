@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Toaster } from "@/app/components/shadcn/toast/toaster";
 
 export const metadata: Metadata = {
   title: "MyPage - Coffee Chat App",
@@ -8,5 +9,10 @@ export const metadata: Metadata = {
 export default function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return <div>{children}</div>;
+  return (
+    <div>
+      {children}
+      <Toaster />
+    </div>
+  );
 }

@@ -3,6 +3,7 @@
 import { BaseButton } from "@/app/components/common/button/BaseButton/BaseButton";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -32,7 +33,7 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
     setHobbies,
     socialmedialinks,
     setSocialmedialinks,
-    updateProfileWithUserId,
+    clientAction,
     handleRemoveItemFromArray,
   } = useEditProfileDialog({ userProfile });
 
@@ -43,7 +44,7 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <Form {...form}>
-          <form action={updateProfileWithUserId}>
+          <form action={clientAction}>
             <DialogHeader>
               <DialogTitle className="text-center">Edit profile</DialogTitle>
               <DialogDescription>
@@ -221,7 +222,9 @@ export const EditProfileDialog = ({ userProfile }: EditProfileDialogProps) => {
               />
             </div>
             <DialogFooter className="sm:justify-center pt-4">
-              <BaseButton type="submit">Save changes</BaseButton>
+              <DialogClose>
+                <BaseButton type="submit">Save changes</BaseButton>
+              </DialogClose>
             </DialogFooter>
           </form>
         </Form>

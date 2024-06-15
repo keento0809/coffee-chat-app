@@ -8,7 +8,7 @@ export default async function Page() {
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) redirect("/login");
 
-  const { data: userProfile, error: fetchError } = await supabase
+  const { data: userProfiles, error: fetchError } = await supabase
     .from("profiles")
     .select("*")
     .eq("id", data.user.id)
@@ -19,5 +19,5 @@ export default async function Page() {
     redirect("/error");
   }
 
-  return <MyPage userProfile={userProfile[0]} />;
+  return <MyPage userProfile={userProfiles[0]} />;
 }

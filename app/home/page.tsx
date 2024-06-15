@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 
 export default async function Page() {
   const supabase = createClient();
+  const { data } = await supabase.auth.getUser();
+
   const { data: userProfiles, error: fetchError } = await supabase
     .from("profiles")
     .select("*")
@@ -15,5 +17,9 @@ export default async function Page() {
     redirect("/error");
   }
 
-  return <HomePage userProfiles={userProfiles} />;
+  const filteredUserProfiles = userProfiles.filter(
+    (profile) => profile.id !== data?.user?.id
+  );
+
+  return <HomePage userProfiles={filteredUserProfiles} />;
 }

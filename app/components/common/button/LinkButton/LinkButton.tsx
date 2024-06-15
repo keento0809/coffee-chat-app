@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/app/components/shadcn/button/button";
 import Link from "next/link";
 import { FC } from "react";

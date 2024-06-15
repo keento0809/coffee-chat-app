@@ -8,7 +8,7 @@ type ProfileListProps = {
 export const ProfileList: FC<ProfileListProps> = ({ userProfile }) => {
   const userProfileArray = Object.entries(userProfile).slice(1);
   return (
-    <ul className="list-none py-10 w-full md:max-w-[450px]">
+    <ul className="list-none py-10 w-full md:max-w-[450px] md:mx-auto">
       {userProfileArray.map(([key, value], idx) => {
         if (Array.isArray(value)) {
           const joinedValue = value.join(",");

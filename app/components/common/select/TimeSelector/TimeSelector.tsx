@@ -18,15 +18,17 @@ export type SelectItem = {
 type TimeSelectorProps = {
   placeholderText: string;
   selectItems: SelectItem[];
+  onValueChange?: (value: string) => void;
 };
 
 export const TimeSelector: React.FC<TimeSelectorProps> = ({
   placeholderText,
   selectItems,
+  onValueChange,
 }) => {
   return (
-    <Select>
-      <SelectTrigger className="">
+    <Select onValueChange={onValueChange}>
+      <SelectTrigger>
         <SelectValue placeholder={placeholderText} />
       </SelectTrigger>
       <SelectContent>

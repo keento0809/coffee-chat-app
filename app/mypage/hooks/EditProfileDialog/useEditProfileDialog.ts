@@ -35,12 +35,6 @@ export const useEditProfileDialog = ({
   const [socialmedialinks, setSocialmedialinks] = useState<string[]>(
     ensureIsArray(userProfile.socialmedialinks)
   );
-  console.log(
-    "どないやねん、",
-    userProfile,
-    "と、",
-    ensureIsArray(userProfile.socialmedialinks)
-  );
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({

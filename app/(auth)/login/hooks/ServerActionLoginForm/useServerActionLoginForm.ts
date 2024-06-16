@@ -6,6 +6,8 @@ import { useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { EMAIL_PATTERN } from "../LoginForm/useLoginForm";
+import { login } from "@/app/(auth)/login/lib/actions";
+import { useState } from "react";
 
 export const loginUserSchema = z.object({
   email: z
@@ -21,12 +23,27 @@ type LoginForm = z.infer<typeof loginUserSchema>;
 
 export const useServerActionLoginForm = () => {
   const { pending } = useFormStatus();
+  const [errors, setErrors] = useState<{
+    email: string;
+    password: string;
+  }>({ email: "", password: "" });
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginUserSchema),
   });
 
   const router = useRouter();
+
+  const clientAction = async (formData: FormData) => {
+    const result = await login(formData);
+
+    if (result.emailError || result.passwordError) {
+      setErrors({
+        email: result.emailError,
+        password: result.passwordError,
+      });
+    }
+  };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (pending) {
@@ -36,6 +53,8 @@ export const useServerActionLoginForm = () => {
 
   return {
     router,
+    errors,
+    clientAction,
     form,
     pending,
     handleClick,

@@ -23,14 +23,19 @@ export async function login(queryData: FormData) {
     password: queryData.get("password"),
   });
 
-  if (!parsedFormData.success)
-    return { errors: parsedFormData.error.flatten().fieldErrors };
+  if (!parsedFormData.success) {
+    const { email, password } = parsedFormData.error.flatten().fieldErrors;
+    return {
+      emailError: email ? email[0] : "",
+      passwordError: password ? password[0] : "",
+    };
+  }
 
   const supabase = createClient();
   const { error } = await supabase.auth.signInWithPassword(parsedFormData.data);
 
   if (error) {
-    return { errors: error };
+    redirect("/error");
   }
 
   revalidatePath("/", "layout");

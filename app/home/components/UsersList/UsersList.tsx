@@ -8,7 +8,6 @@ type UsersListProps = {
 };
 
 export const UsersList: FC<UsersListProps> = ({ userProfiles }) => {
-  console.log("ユーザーぷろいj ", userProfiles);
   return (
     <ul className="my-10 flex items-center gap-1">
       {userProfiles?.map((profile) => {

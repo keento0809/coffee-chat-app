@@ -16,8 +16,10 @@ import { Textarea } from "@/app/components/shadcn/textarea/textarea";
 import { UserProfile } from "@/types";
 import { FC } from "react";
 import { useBookCoffeeChatForm } from "../../hooks/BookCoffeeChatForm/useBookCoffeeChatForm";
+import { book } from "../../lib/actions";
 
 const formSchema = z.object({
+  userId: z.string().uuid(),
   username: z.string({ message: "username is required" }),
   date: z.string(),
   time: z.string({ message: "time is required" }),
@@ -33,20 +35,12 @@ type BookCoffeeChatFormProps = {
 export const BookCoffeeChatForm: FC<BookCoffeeChatFormProps> = ({
   userProfile,
 }) => {
-  const {
-    form,
-    timeOptions,
-    selectableTimeOptions,
-    handleChangeTimeOption,
-    onSubmit,
-  } = useBookCoffeeChatForm();
+  const { form, timeOptions, selectableTimeOptions, handleChangeTimeOption } =
+    useBookCoffeeChatForm();
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 mx-auto max-w-[450px]"
-      >
+      <form action={book} className="space-y-8 mx-auto max-w-[450px]">
         <FormField
           control={form.control}
           name="username"

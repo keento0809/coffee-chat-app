@@ -1,3 +1,5 @@
+"use client";
+
 import { BackButton } from "@/app/components/common/button/BackButton/BackButton";
 import { BookCoffeeChatForm } from "@/app/profile/[id]/book/components/BookCoffeeChatForm/BookCoffeeChatForm";
 import { PageTitle } from "@/app/components/common/title/PageTitle";

@@ -27,7 +27,7 @@ export const UserCard: FC<UserCardProps> = ({
         <span className="font-semibold text-lg leading-none text-gray-900 hover:text-indigo-600 transition duration-500 ease-in-out">
           {userProfile.username}
         </span>
-        <p>{userProfile.occupation}</p>
+        <p className="min-h-5">{userProfile.occupation}</p>
       </div>
 
       <p className="mt-2 text-xs text-gray-900">hobby: {userProfile.hobby}</p>

@@ -67,7 +67,7 @@ export const BookCoffeeChatForm: FC<BookCoffeeChatFormProps> = ({
             <FormItem>
               <FormLabel className="text-left pl-1 block">Date</FormLabel>
               <FormControl>
-                <DatePicker />
+                <DatePicker {...field} />
               </FormControl>
             </FormItem>
           )}

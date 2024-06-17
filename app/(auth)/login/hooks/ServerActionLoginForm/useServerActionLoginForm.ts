@@ -8,6 +8,7 @@ import { z } from "zod";
 import { EMAIL_PATTERN } from "../LoginForm/useLoginForm";
 import { login } from "@/app/(auth)/login/lib/actions";
 import { useState } from "react";
+import { toast } from "@/app/components/shadcn/toast/use-toast";
 
 export const loginUserSchema = z.object({
   email: z
@@ -43,6 +44,10 @@ export const useServerActionLoginForm = () => {
         password: result.passwordError,
       });
     }
+
+    toast({
+      description: "Successfully logged in!",
+    });
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

@@ -6,8 +6,8 @@ import Link from "next/link";
 import { FC, useState } from "react";
 
 const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
+  { name: "Home", href: "/home" },
+  { name: "About", href: "/about" },
   { name: "Marketplace", href: "#" },
 ];
 

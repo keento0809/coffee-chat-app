@@ -38,15 +38,17 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              {item.name}
-            </Link>
-          ))}
+          {user
+            ? navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                >
+                  {item.name}
+                </Link>
+              ))
+            : null}
           {user && (
             <span
               className="block text-sm cursor-pointer font-semibold leading-6 text-gray-900"

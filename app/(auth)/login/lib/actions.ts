@@ -4,8 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-
-const EMAIL_PATTERN = /^[\u0021-\u007e]+$/u;
+import { EMAIL_PATTERN } from "@/constants";
 
 const formSchema = z.object({
   email: z

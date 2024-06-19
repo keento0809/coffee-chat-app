@@ -5,7 +5,7 @@ import { redirect, useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { EMAIL_PATTERN } from "../LoginForm/useLoginForm";
+import { EMAIL_PATTERN } from "@/constants";
 import { login } from "@/app/(auth)/login/lib/actions";
 import { useState } from "react";
 import { useToast } from "@/app/components/shadcn/toast/use-toast";

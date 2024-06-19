@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { z } from "zod";
-import { EMAIL_PATTERN } from "@/app/(auth)/login/hooks/LoginForm/useLoginForm";
+import { EMAIL_PATTERN } from "@/constants";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signup } from "@/app/(auth)/signup/lib/actions";

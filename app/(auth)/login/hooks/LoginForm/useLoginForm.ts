@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { type ZodError, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { redirect } from "next/navigation";
-export const EMAIL_PATTERN = /^[\u0021-\u007e]+$/u;
+import { EMAIL_PATTERN } from "@/constants";
 
 export const formSchema = z.object({
   email: z

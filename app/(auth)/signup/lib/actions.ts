@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import type { UserProfile } from "@/types";
 import { z } from "zod";
-import { EMAIL_PATTERN } from "../../login/hooks/LoginForm/useLoginForm";
+import { EMAIL_PATTERN } from "@/constants";
 
 const formSchema = z
   .object({

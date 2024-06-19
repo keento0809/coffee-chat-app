@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ZodError, z } from "zod";
-import { EMAIL_PATTERN } from "@/app/(auth)/login/hooks/LoginForm/useLoginForm";
-// import { EMAIL_PATTERN } from "@/src/constants/regex/regex";
+import { z } from "zod";
+import { EMAIL_PATTERN } from "@/constants";
 import { useForm } from "react-hook-form";
-import { redirect } from "next/navigation";
-// import { useToast } from "@/app/components/common/toast/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signup } from "@/app/(auth)/signup/lib/actions";
 
 export const userSchema = z
   .object({
@@ -36,6 +35,8 @@ export const userSchema = z
     }
   });
 
+type SignupForm = z.infer<typeof userSchema>;
+
 type ErrorType = {
   username: string;
   email: string;
@@ -44,60 +45,74 @@ type ErrorType = {
 };
 
 export const useSignupForm = () => {
-  const [errors, setErrors] = useState<ZodError<ErrorType> | null>(null);
-  const form = useForm<z.infer<typeof userSchema>>();
-  //   const { toast } = useToast();
+  const [errors, setErrors] = useState<ErrorType>({
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+  });
+  const form = useForm<SignupForm>({
+    resolver: zodResolver(userSchema),
+  });
 
-  const usernameError = errors?.issues.find((e) => e.path[0] === "username");
-  const emailError = errors?.issues.find((e) => e.path[0] === "email");
-  const passwordError = errors?.issues.find((e) => e.path[0] === "password");
-  const passwordConfirmationError = errors?.issues.find(
-    (e) => e.path[0] === "passwordConfirmation"
-  );
+  const clientAction = async (formData: FormData) => {
+    const result = await signup(formData);
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const signUpUserData = new FormData(event.currentTarget);
-    const credentials = {
-      username: signUpUserData.get("username"),
-      email: signUpUserData.get("email"),
-      password: signUpUserData.get("password"),
-    };
-    const parsedCredentials = userSchema.safeParse(credentials);
-
-    if (!parsedCredentials.success) {
-      setErrors(parsedCredentials.error);
-      return;
-    }
-
-    try {
-      const newUser = await fetch("/api/signup", {
-        method: "POST",
-        body: JSON.stringify(parsedCredentials.data),
-        headers: {
-          "Content-Type": "application/json",
-        },
+    if (
+      result.usernameError ||
+      result.emailError ||
+      result.password ||
+      result.passwordConfirmation
+    ) {
+      setErrors({
+        username: result.usernameError,
+        email: result.emailError,
+        password: result.password,
+        passwordConfirmation: result.passwordConfirmation,
       });
-      if (newUser) redirect("/home");
-      //   toast({
-      //     description: "Signup completed!",
-      //   });
-    } catch (error) {
-      if (error instanceof Error) console.log(error.message);
-      //   toast({
-      //     variant: "destructive",
-      //     description: "Failed to signup. Please try it again",
-      //   });
     }
   };
 
+  // const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+
+  //   const signUpUserData = new FormData(event.currentTarget);
+  //   const credentials = {
+  //     username: signUpUserData.get("username"),
+  //     email: signUpUserData.get("email"),
+  //     password: signUpUserData.get("password"),
+  //   };
+  //   const parsedCredentials = userSchema.safeParse(credentials);
+
+  //   if (!parsedCredentials.success) {
+  //     setErrors(parsedCredentials.error);
+  //     return;
+  //   }
+
+  //   try {
+  //     const newUser = await fetch("/api/signup", {
+  //       method: "POST",
+  //       body: JSON.stringify(parsedCredentials.data),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     if (newUser) redirect("/home");
+  //     //   toast({
+  //     //     description: "Signup completed!",
+  //     //   });
+  //   } catch (error) {
+  //     if (error instanceof Error) console.log(error.message);
+  //     //   toast({
+  //     //     variant: "destructive",
+  //     //     description: "Failed to signup. Please try it again",
+  //     //   });
+  //   }
+  // };
+
   return {
     form,
-    onSubmit,
-    usernameError,
-    emailError,
-    passwordError,
-    passwordConfirmationError,
+    clientAction,
+    errors,
   };
 };

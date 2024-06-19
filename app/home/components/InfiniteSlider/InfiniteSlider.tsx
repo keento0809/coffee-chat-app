@@ -1,9 +1,7 @@
-import Image from "next/image";
 import { FC } from "react";
-import testImgURL from "@/public/images/test-img.jpg";
-import { UserCard } from "@/app/components/common/card/UserCard/UserCard";
+import { DummyUserCard } from "@/app/components/common/card/DummyUserCard/DummyUserCard";
 
-export const DUMMY_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
+export const DUMMY_ARRAY = Array.from({ length: 10 }, (_, i) => i + 1);
 
 type SliderCompProps = {
   array: number[];
@@ -21,7 +19,7 @@ const SliderComp: FC<SliderCompProps> = ({ array }) => {
             key={num}
             className="p-5 block border rounded text-center text-gray-500 lg:min-w-[300px]"
           >
-            <UserCard className="cursor-not-allowed" />
+            <DummyUserCard className="cursor-not-allowed" />
           </li>
         );
       })}

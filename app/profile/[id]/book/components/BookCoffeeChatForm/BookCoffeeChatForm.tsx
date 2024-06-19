@@ -1,7 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
   Form,
@@ -13,14 +11,15 @@ import {
 import { Input } from "@/app/components/shadcn/input/input";
 import { BaseButton } from "../../../../../components/common/button/BaseButton/BaseButton";
 import { DatePicker } from "@/app/components/common/datepicker/DatePicker/DatePicker";
-import {
-  SelectItem,
-  TimeSelector,
-} from "@/app/components/common/select/TimeSelector/TimeSelector";
-import { generateTimeOptions } from "@/utils";
+import { TimeSelector } from "@/app/components/common/select/TimeSelector/TimeSelector";
 import { Textarea } from "@/app/components/shadcn/textarea/textarea";
+import { UserProfile } from "@/types";
+import { FC, useState } from "react";
+import { useBookCoffeeChatForm } from "../../hooks/BookCoffeeChatForm/useBookCoffeeChatForm";
+import { book } from "../../lib/actions";
 
 const formSchema = z.object({
+  userId: z.string().uuid(),
   username: z.string({ message: "username is required" }),
   date: z.string(),
   time: z.string({ message: "time is required" }),
@@ -29,32 +28,25 @@ const formSchema = z.object({
 
 type FormType = z.infer<typeof formSchema>;
 
-export const BookCoffeeChatForm = () => {
-  const form = useForm<FormType>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-      date: "",
-      time: "",
-    },
-  });
+type BookCoffeeChatFormProps = {
+  userProfile: UserProfile;
+};
 
-  const timeOptions = generateTimeOptions();
-  const selectableTimeOptions = (item: SelectItem) => {
-    const idx = timeOptions.indexOf(item);
-    console.log("idx: ", idx);
-  };
-
-  const onSubmit = () => {
-    console.log("vals: ", form.getValues());
-  };
+export const BookCoffeeChatForm: FC<BookCoffeeChatFormProps> = ({
+  userProfile,
+}) => {
+  const {
+    date,
+    setDate,
+    form,
+    timeOptions,
+    selectableTimeOptions,
+    handleChangeTimeOption,
+  } = useBookCoffeeChatForm();
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 mx-auto max-w-[450px]"
-      >
+      <form action={book} className="space-y-8 mx-auto max-w-[450px]">
         <FormField
           control={form.control}
           name="username"
@@ -62,7 +54,14 @@ export const BookCoffeeChatForm = () => {
             <FormItem>
               <FormLabel className="text-left pl-1 block">Username</FormLabel>
               <FormControl>
-                <Input readOnly defaultValue={"testname"} disabled {...field} />
+                <Input
+                  readOnly
+                  defaultValue={
+                    userProfile.username !== null ? userProfile.username : ""
+                  }
+                  disabled
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}
@@ -73,8 +72,9 @@ export const BookCoffeeChatForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-left pl-1 block">Date</FormLabel>
+              <DatePicker date={date} setDate={setDate} />
               <FormControl>
-                <DatePicker />
+                <Input className="hidden" {...field} value={date?.toString()} />
               </FormControl>
             </FormItem>
           )}
@@ -90,12 +90,13 @@ export const BookCoffeeChatForm = () => {
                   <TimeSelector
                     placeholderText="From"
                     selectItems={timeOptions}
+                    onValueChange={handleChangeTimeOption}
                     {...field}
                   />
                   <div>〜</div>
                   <TimeSelector
                     placeholderText="To"
-                    selectItems={timeOptions}
+                    selectItems={selectableTimeOptions}
                     {...field}
                   />
                 </div>
@@ -106,11 +107,11 @@ export const BookCoffeeChatForm = () => {
         <FormField
           control={form.control}
           name="note"
-          render={({}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel className="text-left pl-1 block">Note</FormLabel>
               <FormControl>
-                <Textarea />
+                <Textarea {...field} />
               </FormControl>
             </FormItem>
           )}

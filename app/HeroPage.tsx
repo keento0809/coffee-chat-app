@@ -3,14 +3,13 @@
 import { InfiniteSlider } from "@/app/home/components/InfiniteSlider/InfiniteSlider";
 import { FC } from "react";
 import { LinkButton } from "./components/common/button/LinkButton/LinkButton";
+import { PageTitle } from "./components/common/title/PageTitle";
 
 export const HeroPage: FC = () => {
   return (
     <div>
       <div className="text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-          Expand Your NetWork
-        </h1>
+        <PageTitle title="Expand Your NetWork" />
         <p className="mt-6 text-lg leading-6 text-gray-600">
           This application enables you to connect people online through coffee
           chat.

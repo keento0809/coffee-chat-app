@@ -1,11 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { EMAIL_PATTERN } from "../LoginForm/useLoginForm";
+import { EMAIL_PATTERN } from "@/constants";
+import { login } from "@/app/(auth)/login/lib/actions";
+import { useState } from "react";
+import { useToast } from "@/app/components/shadcn/toast/use-toast";
 
 export const loginUserSchema = z.object({
   email: z
@@ -20,13 +23,33 @@ export const loginUserSchema = z.object({
 type LoginForm = z.infer<typeof loginUserSchema>;
 
 export const useServerActionLoginForm = () => {
+  const { toast } = useToast();
   const { pending } = useFormStatus();
+  const [errors, setErrors] = useState<{
+    email: string;
+    password: string;
+  }>({ email: "", password: "" });
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginUserSchema),
   });
 
   const router = useRouter();
+
+  const clientAction = async (formData: FormData) => {
+    const result = await login(formData);
+
+    if (result?.emailError || result?.passwordError) {
+      setErrors({
+        email: result?.emailError,
+        password: result?.passwordError,
+      });
+    }
+
+    toast({
+      description: "Successfully logged in!",
+    });
+  };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (pending) {
@@ -36,6 +59,8 @@ export const useServerActionLoginForm = () => {
 
   return {
     router,
+    errors,
+    clientAction,
     form,
     pending,
     handleClick,

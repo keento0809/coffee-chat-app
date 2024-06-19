@@ -6,8 +6,8 @@ import Link from "next/link";
 import { FC, useState } from "react";
 
 const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
+  { name: "Home", href: "/home" },
+  { name: "About", href: "/about" },
   { name: "Marketplace", href: "#" },
 ];
 
@@ -38,18 +38,20 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              {item.name}
-            </Link>
-          ))}
+          {user
+            ? navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                >
+                  {item.name}
+                </Link>
+              ))
+            : null}
           {user && (
             <span
-              className="block text-sm font-semibold leading-6 text-gray-900"
+              className="block text-sm cursor-pointer font-semibold leading-6 text-gray-900"
               onClick={() => signOut()}
             >
               SignOut
@@ -60,14 +62,14 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
           {user ? (
             <Link
               href="/mypage"
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm cursor-pointer font-semibold leading-6 text-gray-900"
             >
               MyPage
             </Link>
           ) : (
             <Link
               href="/login"
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm cursor-pointer font-semibold leading-6 text-gray-900"
             >
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>

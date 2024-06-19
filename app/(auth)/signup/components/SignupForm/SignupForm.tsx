@@ -6,31 +6,21 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/app/components/shadcn/form/form";
 import { Input } from "@/app/components/shadcn/input/input";
 import { useSignupForm } from "@/app/(auth)/signup/hooks/SignupForm/useSignupForm";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { signup } from "@/app/(auth)/signup/lib/actions";
 import { BaseButton } from "@/app/components/common/button/BaseButton/BaseButton";
 
 export const SignupForm = () => {
-  const {
-    form,
-    onSubmit,
-    usernameError,
-    emailError,
-    passwordError,
-    passwordConfirmationError,
-  } = useSignupForm();
+  const { form, clientAction, errors } = useSignupForm();
   const router = useRouter();
 
   return (
     <Form {...form}>
       <form
-        // onSubmit={onSubmit}
-        action={signup}
+        action={clientAction}
         className="w-full max-w-[450px] space-y-6 px-4 md:px-0"
       >
         <FormField
@@ -41,7 +31,7 @@ export const SignupForm = () => {
               <FormLabel
                 className={cn(
                   "block pl-1.5 text-left",
-                  usernameError && "text-red-500"
+                  errors.username && "text-red-500"
                 )}
               >
                 Username
@@ -50,12 +40,12 @@ export const SignupForm = () => {
                 <Input
                   placeholder="username"
                   {...field}
-                  className={cn(usernameError && "border-red-500")}
+                  className={cn(errors.email && "border-red-500")}
                 />
               </FormControl>
-              <FormMessage>
+              {/* <FormMessage>
                 {usernameError && usernameError.message}
-              </FormMessage>
+              </FormMessage> */}
             </FormItem>
           )}
         />
@@ -66,8 +56,8 @@ export const SignupForm = () => {
             <FormItem>
               <FormLabel
                 className={cn(
-                  "block pl-1.5 text-left",
-                  emailError && "text-red-500"
+                  "block pl-1.5 text-left"
+                  // emailError && "text-red-500"
                 )}
               >
                 Email
@@ -76,10 +66,10 @@ export const SignupForm = () => {
                 <Input
                   placeholder="email"
                   {...field}
-                  className={cn(emailError && "border-red-500")}
+                  // className={cn(emailError && "border-red-500")}
                 />
               </FormControl>
-              <FormMessage>{emailError && emailError.message}</FormMessage>
+              {/* <FormMessage>{emailError && emailError.message}</FormMessage> */}
             </FormItem>
           )}
         />
@@ -90,8 +80,8 @@ export const SignupForm = () => {
             <FormItem>
               <FormLabel
                 className={cn(
-                  "block pl-1.5 text-left",
-                  passwordError && "text-red-500"
+                  "block pl-1.5 text-left"
+                  // passwordError && "text-red-500"
                 )}
               >
                 Password
@@ -101,12 +91,12 @@ export const SignupForm = () => {
                   type="password"
                   placeholder="password"
                   {...field}
-                  className={cn(passwordError && "border-red-500")}
+                  // className={cn(passwordError && "border-red-500")}
                 />
               </FormControl>
-              <FormMessage>
+              {/* <FormMessage>
                 {passwordError && passwordError.message}
-              </FormMessage>
+              </FormMessage> */}
             </FormItem>
           )}
         />
@@ -117,8 +107,8 @@ export const SignupForm = () => {
             <FormItem>
               <FormLabel
                 className={cn(
-                  "block pl-1.5 text-left",
-                  passwordConfirmationError && "text-red-500"
+                  "block pl-1.5 text-left"
+                  // passwordConfirmationError && "text-red-500"
                 )}
               >
                 Password Confirmation
@@ -128,12 +118,12 @@ export const SignupForm = () => {
                   type="password"
                   placeholder="password confirmation"
                   {...field}
-                  className={cn(passwordConfirmationError && "border-red-500")}
+                  // className={cn(passwordConfirmationError && "border-red-500")}
                 />
               </FormControl>
-              <FormMessage>
+              {/* <FormMessage>
                 {passwordError && passwordError.message}
-              </FormMessage>
+              </FormMessage> */}
             </FormItem>
           )}
         />

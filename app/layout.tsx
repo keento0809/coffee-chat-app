@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navbar } from "./components/common/nav/Navbar/Navbar";
 import { BgWrapper } from "./components/common/wrapper/BgWrapper/BgWrapper";
 import { createClient } from "@/utils/supabase/server";
+import { Toaster } from "./components/shadcn/toast/toaster";
 
 export const metadata: Metadata = {
   title: "Coffee Chat App",
@@ -22,6 +23,7 @@ export default async function RootLayout({
         <BgWrapper>
           <Navbar user={data.user} />
           {children}
+          <Toaster />
         </BgWrapper>
       </body>
     </html>

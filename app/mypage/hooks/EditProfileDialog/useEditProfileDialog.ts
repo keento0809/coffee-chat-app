@@ -70,7 +70,6 @@ export const useEditProfileDialog = ({
       alert(result.error);
     }
 
-    // TODO: Add toast here
     toast({
       description: "Successfully updated!",
     });

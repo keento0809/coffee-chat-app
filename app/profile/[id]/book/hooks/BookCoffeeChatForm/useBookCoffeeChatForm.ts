@@ -28,6 +28,7 @@ export const useBookCoffeeChatForm = () => {
     },
   });
   const [optIndex, setOptIndex] = useState(0);
+  const [date, setDate] = useState<Date>();
 
   const timeOptions = generateTimeOptions();
 
@@ -51,6 +52,8 @@ export const useBookCoffeeChatForm = () => {
   };
 
   return {
+    date,
+    setDate,
     form,
     timeOptions,
     selectableTimeOptions,

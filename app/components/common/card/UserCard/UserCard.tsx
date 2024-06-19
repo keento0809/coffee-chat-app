@@ -4,16 +4,10 @@ import testImg from "@/public/images/avatar-test.jpg";
 import { UserProfile } from "@/types";
 
 type UserCardProps = {
-  className?: string;
-  linkURL: string;
   userProfile: UserProfile;
 };
 
-export const UserCard: FC<UserCardProps> = ({
-  className,
-  linkURL = "/",
-  userProfile,
-}) => {
+export const UserCard: FC<UserCardProps> = ({ userProfile }) => {
   return (
     <div>
       <Image
@@ -30,9 +24,11 @@ export const UserCard: FC<UserCardProps> = ({
         <p className="min-h-5">{userProfile.occupation}</p>
       </div>
 
-      <p className="mt-2 text-xs text-gray-900">hobby: {userProfile.hobby}</p>
+      <p className="mt-2 text-xs text-gray-900">
+        hobby: {userProfile.hobby?.join(",")}
+      </p>
       <p className="mt-0.5 text-xs text-gray-900">
-        socialMedia: {userProfile.socialmedialinks}
+        socialMedia: {userProfile.socialmedialinks?.join(",")}
       </p>
     </div>
   );

@@ -14,7 +14,7 @@ import { DatePicker } from "@/app/components/common/datepicker/DatePicker/DatePi
 import { TimeSelector } from "@/app/components/common/select/TimeSelector/TimeSelector";
 import { Textarea } from "@/app/components/shadcn/textarea/textarea";
 import { UserProfile } from "@/types";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useBookCoffeeChatForm } from "../../hooks/BookCoffeeChatForm/useBookCoffeeChatForm";
 import { book } from "../../lib/actions";
 
@@ -35,8 +35,14 @@ type BookCoffeeChatFormProps = {
 export const BookCoffeeChatForm: FC<BookCoffeeChatFormProps> = ({
   userProfile,
 }) => {
-  const { form, timeOptions, selectableTimeOptions, handleChangeTimeOption } =
-    useBookCoffeeChatForm();
+  const {
+    date,
+    setDate,
+    form,
+    timeOptions,
+    selectableTimeOptions,
+    handleChangeTimeOption,
+  } = useBookCoffeeChatForm();
 
   return (
     <Form {...form}>
@@ -66,8 +72,9 @@ export const BookCoffeeChatForm: FC<BookCoffeeChatFormProps> = ({
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-left pl-1 block">Date</FormLabel>
+              <DatePicker date={date} setDate={setDate} />
               <FormControl>
-                <DatePicker {...field} />
+                <Input className="hidden" {...field} value={date?.toString()} />
               </FormControl>
             </FormItem>
           )}
@@ -104,7 +111,7 @@ export const BookCoffeeChatForm: FC<BookCoffeeChatFormProps> = ({
             <FormItem>
               <FormLabel className="text-left pl-1 block">Note</FormLabel>
               <FormControl>
-                <Textarea />
+                <Textarea {...field} />
               </FormControl>
             </FormItem>
           )}

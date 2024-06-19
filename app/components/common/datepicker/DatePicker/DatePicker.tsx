@@ -20,8 +20,13 @@ import {
   SelectValue,
 } from "@/app/components/shadcn/select/select";
 
-export function DatePicker() {
-  const [date, setDate] = React.useState<Date>();
+type DatePickerProps = {
+  date: Date | undefined;
+  setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+};
+
+export const DatePicker = ({ date, setDate }: DatePickerProps) => {
+  // const [date, setDate] = React.useState<Date>();
 
   return (
     <Popover>
@@ -59,4 +64,4 @@ export function DatePicker() {
       </PopoverContent>
     </Popover>
   );
-}
+};

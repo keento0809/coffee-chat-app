@@ -17,7 +17,7 @@ export const UsersList: FC<UsersListProps> = ({ userProfiles }) => {
             className="p-5 block mx-1 border rounded text-center text-gray-500 max-w-sm lg:min-w-[300px] hover:border-slate-600 transition-all hover:scale-105 cursor-pointer"
           >
             <Link href={`/profile/${profile.id}`}>
-              <UserCard userProfile={profile} linkURL={`/profile/${profile}`} />
+              <UserCard userProfile={profile} />
             </Link>
           </li>
         );

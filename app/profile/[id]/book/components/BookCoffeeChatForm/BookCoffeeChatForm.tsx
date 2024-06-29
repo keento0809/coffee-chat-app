@@ -14,9 +14,8 @@ import { DatePicker } from "@/app/components/common/datepicker/DatePicker/DatePi
 import { TimeSelector } from "@/app/components/common/select/TimeSelector/TimeSelector";
 import { Textarea } from "@/app/components/shadcn/textarea/textarea";
 import { UserProfile } from "@/types";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useBookCoffeeChatForm } from "../../hooks/BookCoffeeChatForm/useBookCoffeeChatForm";
-import { book } from "../../lib/actions";
 
 const formSchema = z.object({
   userId: z.string().uuid(),
@@ -36,32 +35,43 @@ export const BookCoffeeChatForm: FC<BookCoffeeChatFormProps> = ({
   userProfile,
 }) => {
   const {
+    userId,
     date,
     setDate,
     form,
+    clientAction,
     timeOptions,
     selectableTimeOptions,
     handleChangeTimeOption,
+    selectedTime,
+    setSelectedTime,
   } = useBookCoffeeChatForm();
 
   return (
     <Form {...form}>
-      <form action={book} className="space-y-8 mx-auto max-w-[450px]">
+      <form action={clientAction} className="space-y-8 mx-auto max-w-[450px]">
         <FormField
           control={form.control}
-          name="username"
+          name="userid"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-left pl-1 block">Username</FormLabel>
               <FormControl>
-                <Input
-                  readOnly
-                  defaultValue={
-                    userProfile.username !== null ? userProfile.username : ""
-                  }
-                  disabled
-                  {...field}
-                />
+                <>
+                  <Input
+                    readOnly
+                    defaultValue={
+                      userProfile.username !== null ? userProfile.username : ""
+                    }
+                    disabled
+                  />
+                  <Input
+                    defaultValue={userId}
+                    {...field}
+                    disabled
+                    className="hidden"
+                  />
+                </>
               </FormControl>
             </FormItem>
           )}
@@ -74,7 +84,11 @@ export const BookCoffeeChatForm: FC<BookCoffeeChatFormProps> = ({
               <FormLabel className="text-left pl-1 block">Date</FormLabel>
               <DatePicker date={date} setDate={setDate} />
               <FormControl>
-                <Input className="hidden" {...field} value={date?.toString()} />
+                <Input
+                  className="hidden"
+                  {...field}
+                  value={date ? date.toString() : ""}
+                />
               </FormControl>
             </FormItem>
           )}
@@ -86,20 +100,28 @@ export const BookCoffeeChatForm: FC<BookCoffeeChatFormProps> = ({
             <FormItem>
               <FormLabel className="text-left pl-1 block">Time</FormLabel>
               <FormControl>
-                <div className="flex items-center gap-2">
-                  <TimeSelector
-                    placeholderText="From"
-                    selectItems={timeOptions}
-                    onValueChange={handleChangeTimeOption}
+                <>
+                  <div className="flex items-center gap-2">
+                    <TimeSelector
+                      placeholderText="From"
+                      selectItems={timeOptions}
+                      onValueChange={handleChangeTimeOption}
+                    />
+                    <div>〜</div>
+                    <TimeSelector
+                      placeholderText="To"
+                      selectItems={selectableTimeOptions}
+                      onValueChange={(val: string) =>
+                        setSelectedTime({ ...selectedTime, to: val })
+                      }
+                    />
+                  </div>
+                  <Input
+                    className="hidden"
                     {...field}
+                    value={selectedTime.from + "~" + selectedTime.to}
                   />
-                  <div>〜</div>
-                  <TimeSelector
-                    placeholderText="To"
-                    selectItems={selectableTimeOptions}
-                    {...field}
-                  />
-                </div>
+                </>
               </FormControl>
             </FormItem>
           )}
